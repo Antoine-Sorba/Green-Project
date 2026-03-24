@@ -5,3 +5,14 @@ __pycache__/
 venv/
 env/
 outputs/
+*_performance.csv
+alpha_beta.csv
+daily_returns.csv
+monthly_returns.csv
+raw_price_data.csv
+summary_table.csv
+frequency_comparison.csv
+descriptive_statistics.csv
+correlation_matrix.csv
+ticker_coverage.csv
+*.png

@@ -1,39 +1,48 @@
 # Green Finance Empirical Analysis
 
-Empirical finance analysis comparing an ESG ETF, a traditional market benchmark, and a clean energy ETF using Yahoo Finance data accessed through `yfinance`.
+Empirical asset management-style analysis comparing an ESG ETF, a traditional benchmark ETF, and a clean energy ETF using Python and Yahoo Finance data.
 
-## Overview
+## Project Snapshot
 
-This project analyzes three ETFs:
+This repository studies three investment universes:
 
 - `ESGU` as the ESG proxy
 - `SPY` as the traditional market benchmark
-- `ICLN` as the green energy proxy
+- `ICLN` as the clean energy proxy
 
-The script computes and exports:
+The code produces publication-ready tables and figures for a university empirical finance report, including:
 
-- raw adjusted price data
+- raw adjusted price series
 - daily and monthly returns
-- performance metrics
-- alpha and beta versus the market benchmark
-- descriptive statistics
-- correlation matrix and heatmap
-- rolling 30-day Sharpe ratio and volatility
-- summary tables and graphs for report use
+- annualized performance metrics
+- alpha and beta relative to the benchmark
+- descriptive statistics and correlation analysis
+- rolling 30-day Sharpe ratio and rolling volatility
+- export-ready CSV tables and chart files
+
+## Why This Repository Is Useful
+
+- The workflow is transparent: data source, sample period, and ticker coverage are explicitly documented.
+- The script exports clean files that can be inserted directly into a report or presentation.
+- The analysis is reproducible with a single Python script and a short dependency list.
 
 ## Data Source
 
-All market data is downloaded from Yahoo Finance via the `yfinance` Python package.
+All price data is downloaded from Yahoo Finance through `yfinance`.
 
-## Important Data Note
+## Important Data Caveat
 
-`ESGU` begins later than the other ETFs in the sample. The script includes a ticker coverage audit to document first valid dates and missing observations.
+`ESGU` starts later than `SPY` and `ICLN`, so the early sample contains missing values for the ESG series. This is expected and documented in the exported ticker coverage audit.
 
-## Repository Structure
+## Repository Layout
 
-- `green_finance_analysis.py`: main analysis script
-- `requirements.txt`: Python dependencies
-- `outputs/`: generated CSV files and figures created when the script runs
+```text
+green_finance_project/
+├── green_finance_analysis.py
+├── README.md
+├── requirements.txt
+└── outputs/
+```
 
 ## Installation
 
@@ -43,32 +52,40 @@ Use Python 3.9 or newer.
 python3 -m pip install -r requirements.txt
 ```
 
-## Run
+## Run The Analysis
 
 ```bash
 python3 green_finance_analysis.py
 ```
 
-## Generated Outputs
+## Main Outputs
 
-The script creates an `outputs/` directory and exports analysis artifacts such as:
+Running the script creates an `outputs/` folder containing files such as:
 
 - `raw_price_data.csv`
 - `daily_returns.csv`
 - `monthly_returns.csv`
-- `summary_table.csv`
 - `ticker_coverage.csv`
+- `descriptive_statistics.csv`
+- `correlation_matrix.csv`
+- `summary_table.csv`
+- `frequency_comparison.csv`
 - `correlation_heatmap.png`
 - `rolling_sharpe.png`
 - `rolling_volatility.png`
 
-## Methodological Notes
+## Methodology Summary
 
-- Prices are based on Yahoo Finance adjusted close data.
+- Adjusted close prices are used as the core price series.
 - Daily returns are computed with `pct_change(fill_method=None)`.
-- Monthly returns are computed from month-end resampled prices using `resample('ME').last()`.
-- Performance measures include annualized return, annualized volatility, Sharpe ratio, and maximum drawdown.
+- Monthly returns are computed from month-end prices with `resample("ME").last()`.
+- Performance metrics include annualized return, annualized volatility, Sharpe ratio, maximum drawdown, skewness, and kurtosis.
+- Additional diagnostics include a benchmark-relative alpha/beta table, descriptive statistics, and rolling risk indicators.
 
-## GitHub Publishing Recommendation
+## Research Positioning
 
-The `outputs/` folder is ignored by default because it contains generated artifacts. Re-run the script locally to regenerate the analysis outputs.
+This repository is structured as a compact empirical finance project rather than a software package. The emphasis is on readable code, transparent methodology, and exportable outputs suitable for academic or professional reporting.
+
+## Notes For GitHub Visitors
+
+The `outputs/` directory is ignored in version control because it contains generated artifacts. Re-run the script locally to regenerate all tables and figures.
